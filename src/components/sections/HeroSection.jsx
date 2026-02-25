@@ -94,7 +94,7 @@ export default function HeroSection() {
           max-width: 1380px;
           margin: 0 auto;
           width: 100%;
-          padding: 2rem 2.5rem 4rem;
+          padding: 8rem 2.5rem 4rem;
         }
 
         .hero-left {
@@ -602,7 +602,7 @@ export default function HeroSection() {
           .hero-right { max-width: 340px; width: 100%; }
         }
         @media (max-width: 600px) {
-          .hero-body { padding: 2.5rem 1.25rem 2rem; }
+          .hero-body { padding: 4.5rem 1.25rem 2rem; }
           .h-title { font-size: clamp(2.5rem, 11vw, 3.6rem); }
           .h-ctas { flex-direction: column; width: 100%; }
           .h-btn-primary, .h-btn-ghost { width: 100%; justify-content: center; }
@@ -620,7 +620,7 @@ export default function HeroSection() {
 
         <div className="hero-body">
           <div className="hero-left">
-            <div className="h-badge">
+            <div className="h-badge md:pt-0 pt-40">
               <span className="h-badge-dot" />
               Registration Open · 2026
             </div>

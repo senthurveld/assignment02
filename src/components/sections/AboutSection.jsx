@@ -169,7 +169,7 @@ export default function AboutSection() {
             gap:2.8rem;
           }
           .about-text{margin:auto;}
-          .about-item{justify-content:center;text-align:left;}
+          .about-item{justify-content:left;text-align:left;}
         }
 
         @media(max-width:600px){

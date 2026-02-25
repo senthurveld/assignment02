@@ -37,6 +37,10 @@ export default function Footer() {
           }
           @media(max-width:600px){
             .ft-wrap{grid-template-columns:1fr;}
+            .ft{
+            margin-top:1rem;
+            padding-top:1.5rem;
+            }
           }
 
           /* headings */
