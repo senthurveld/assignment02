@@ -14,14 +14,12 @@ export default function Navbar() {
   const [activeLink, setActiveLink] = useState("");
   const menuRef = useRef(null);
 
-  // Scroll effect for navbar background
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu if clicked outside
   useEffect(() => {
     if (!menuOpen) return;
     const handle = (e) => {
@@ -32,11 +30,10 @@ export default function Navbar() {
     return () => document.removeEventListener("mousedown", handle);
   }, [menuOpen]);
 
-  // Track section in view for active link
   useEffect(() => {
     const sections = navLinks.map((l) => document.querySelector(l.href));
     const handleScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight / 3; // trigger a bit earlier
+      const scrollPos = window.scrollY + window.innerHeight / 3;
       let current = "";
       sections.forEach((section, i) => {
         if (section && scrollPos >= section.offsetTop) {
@@ -50,22 +47,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Smooth scroll for mobile links
-  const handleMobileClick = (href) => {
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-      setActiveLink(href);
-      setMenuOpen(false);
-    }
-  };
+ 
 
-  // Smooth scroll for desktop links
-  const handleLinkClick = (href) => {
+  const handleLinkClick = (e, href) => {
+    e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+      const yOffset = -72;   
+      const y =
+        target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
       setActiveLink(href);
+      setMenuOpen(false); 
     }
   };
 
@@ -300,10 +293,7 @@ export default function Navbar() {
                 <a
                   href={l.href}
                   className={`nb-link ${activeLink === l.href ? "active" : ""}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleLinkClick(l.href);
-                  }}
+                  onClick={(e) => handleLinkClick(e, l.href)}
                 >
                   {l.label}
                 </a>
@@ -316,7 +306,7 @@ export default function Navbar() {
             className="nb-cta nb-cta-desk"
             onClick={(e) => {
               e.preventDefault();
-              handleLinkClick("#register");
+              handleLinkClick(e, "#register");
             }}
           >
             <span className="nb-cta-ring" />
@@ -348,52 +338,48 @@ export default function Navbar() {
             <span className="nb-bar" />
           </button>
         </div>
-      </nav>
 
-      <div className={`nb-mobile ${menuOpen ? "open" : ""}`}>
-        <ul className="nb-mobile-list">
-          {navLinks.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className={`nb-mlink ${activeLink === l.href ? "active" : ""}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleMobileClick(l.href);
-                }}
-              >
-                <span className="nb-dot" />
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <a
-          href="#register"
-          className="nb-cta nb-cta-full"
-          onClick={(e) => {
-            e.preventDefault();
-            handleMobileClick("#register");
-          }}
-        >
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+        <div className={`nb-mobile ${menuOpen ? "open" : ""}`}>
+          <ul className="nb-mobile-list">
+            {navLinks.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className={`nb-mlink ${activeLink === l.href ? "active" : ""}`}
+                  onClick={(e) => handleLinkClick(e, l.href)}
+                >
+                  <span className="nb-dot" />
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#register"
+            className="nb-cta nb-cta-full"
+            onClick={(e) => {
+              e.preventDefault();
+              handleLinkClick(e, "#register");
+            }}
           >
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-          </svg>
-          Register Now
-        </a>
-      </div>
-
-      <div style={{ height: "72px" }} />
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg>
+            Register Now
+          </a>
+        </div>
+      </nav>
     </>
   );
 }

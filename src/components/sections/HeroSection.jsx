@@ -619,7 +619,6 @@ export default function HeroSection() {
         <div className="hero-diag" />
 
         <div className="hero-body">
-          
           <div className="hero-left">
             <div className="h-badge">
               <span className="h-badge-dot" />
@@ -769,7 +768,7 @@ export default function HeroSection() {
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
                   <circle cx="9" cy="7" r="4" />
                 </svg>
-                Register for Free →
+                <a href="#register">Register for Free →</a>
               </button>
             </div>
 
