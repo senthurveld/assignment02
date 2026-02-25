@@ -174,9 +174,17 @@ export default function Footer() {
             transform:translateY(-6px) scale(1.07);
             box-shadow:0 20px 45px rgba(37,99,235,.45);
           }
+            .ft-title{
+            font-family:var(--font-head2);
+            font-size:.75rem;
+            letter-spacing:.25em;
+            text-transform:uppercase;
+            color:var(--color-accent-dark);
+            margin-bottom:.8rem;
+          }
         `}</style>
 
-        <div className="ft-wrap">
+        <div className="ft-wrap" id="contact">
           {/* Brand */}
           <div>
             <div className="ft-logo">Medico Expo</div>
@@ -280,9 +288,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <div className="ft-title" id="contact">
-              Contact
-            </div>
+            <div className="ft-title">Contact</div>
             <div className="ft-contact">
               📍 Chennai, Tamil Nadu
               <br />

@@ -60,6 +60,7 @@ export default function RegistrationFormSection() {
           position:relative;
           padding:6rem 2.5rem;
           overflow:hidden;
+          margin-bottom: 1% ;
         }
 
         .reg-wrap{
